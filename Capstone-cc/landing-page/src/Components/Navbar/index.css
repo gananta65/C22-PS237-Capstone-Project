@@ -1,0 +1,16 @@
+.navbar {
+  position: relative;
+  z-index: 1;
+}
+.navbar-brand {
+  font-size: 32px;
+}
+
+.navbar-toggler {
+  border: 0;
+}
+
+.navbar-toggler span {
+  color: #000;
+  font-weight: bold;
+}
