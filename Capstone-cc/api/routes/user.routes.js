@@ -7,6 +7,8 @@ module.exports = (app) => {
 
   router.get("/login", user.login);
 
+  router.get("/profile/:id", user.getProfile);
+
   router.put("/update", user.update);
 
   app.use("/api/user", router);

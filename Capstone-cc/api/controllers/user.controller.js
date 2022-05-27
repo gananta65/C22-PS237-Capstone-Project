@@ -49,7 +49,16 @@ exports.login = (req, res) => {
       res.status(404).send({ status: error.message || "User not found" });
     });
 };
-
+exports.getProfile = (req, res) => {
+  const id = req.params.id;
+  User.findOne({ where: { id: id } })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.status(404).send({ status: error.message || "User not found" });
+    });
+};
 exports.update = (req, res) => {
   const id = req.params.id;
 
