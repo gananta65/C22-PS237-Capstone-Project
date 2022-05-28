@@ -1,0 +1,64 @@
+.ourteam {
+  margin-top: 5%;
+}
+
+.ourteam h1 {
+  text-align: center;
+  font-weight: bold;
+  margin: 8% 0;
+}
+
+.ourteam .card {
+  margin-bottom: 5%;
+}
+
+.member-card {
+  border-radius: 20px;
+  border: 0;
+  transition: 0.3s ease-out;
+}
+
+.member-pict img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.member-info {
+  margin-top: 25px;
+}
+
+.member-info h1 {
+  font-size: 1.5em;
+  margin-bottom: 3px;
+}
+
+.member-card:hover {
+  box-shadow: 0 0px 10px rgba(179, 179, 179, 0.5);
+  transition: 0.3s ease-in;
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+  h1.ourteam-title {
+    font-size: 2.2em;
+  }
+}
+
+@media screen and (min-width: 376px) and (max-width: 425px) {
+  .member-card .card-title {
+    font-size: 2em;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 375px) {
+  h1.ourteam-title {
+    font-size: 2em;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  h1.ourteam-title {
+    font-size: 1.8em;
+  }
+}
