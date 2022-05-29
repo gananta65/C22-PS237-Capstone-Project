@@ -1,6 +1,4 @@
-const db = require("../models");
-
-const Article = db.Article;
+const Article = require("../models").Article;
 
 exports.getArticles = (req, res) => {
   Article.findAll()
