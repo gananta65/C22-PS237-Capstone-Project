@@ -2,18 +2,21 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./models/");
+const multer = require("multer");
 
 const app = express();
 
-const corsOptions = {
-  origin: "http://localhost:8081",
-};
+const processFile = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
 
-app.use(cors(corsOptions));
-
+app.use(cors());
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(processFile.single("file"));
 
 db.sequelize.sync();
 
@@ -22,10 +25,10 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/auth.routes")(app);
-// require("./routes/article.routes")(app);
+require("./routes/article.routes")(app);
 require("./routes/disease.routes")(app);
+require("./routes/user.routes")(app);
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+app.listen(8080, () => {
+  console.log(`Server is running on port 8080.`);
 });

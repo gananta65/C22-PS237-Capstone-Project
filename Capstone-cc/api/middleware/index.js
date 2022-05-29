@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.config");
-const User = require("../models/user");
+const User = require("../models/").User;
 
 exports.tokenVerification = (req, res, next) => {
   const token = req.headers["x-access-token"];
