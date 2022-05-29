@@ -1,11 +1,10 @@
+const article = require("../controllers/article.controller");
+const { tokenVerification } = require("../middleware");
+const router = require("express").Router();
+
 module.exports = (app) => {
-  const article = require("../controllers/article.controller");
+  router.get("/article", tokenVerification, article.getArticles);
+  router.get("/article/:id", tokenVerification, article.getOne);
 
-  const router = require("express").Router();
-
-  router.get("/", article.getArticles);
-
-  router.get("/:id", article.getOne);
-
-  app.use("/api/article", router);
+  app.use("/api", router);
 };
