@@ -9,7 +9,7 @@ const Navbar = () => {
     >
       <div className="container">
         <Link className="navbar-brand" href="#">
-          Logo
+          <img src="img/appmat logo text.png"></img>
         </Link>
         <button
           className="navbar-toggler"

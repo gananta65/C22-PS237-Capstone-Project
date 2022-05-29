@@ -3,7 +3,9 @@ module.exports = (app) => {
 
   const router = require("express").Router();
 
-  router.get("/all", article.getArticles);
+  router.get("/", article.getArticles);
+
+  router.get("/:id", article.getOne);
 
   app.use("/api/article", router);
 };
