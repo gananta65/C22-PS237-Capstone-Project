@@ -38,7 +38,7 @@ exports.register = async (req, res) => {
 
     await User.create(userData);
 
-    res
+    return res
       .status(200)
       .send({ status: "success", message: "User has been created" });
   } catch (error) {

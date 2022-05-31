@@ -15,8 +15,8 @@ exports.getAllDiseases = async (req, res) => {
 
 exports.postDiseases = async (req, res) => {
   try {
-    const myFile = req.file;
-    const imageUrl = await uploadImage(myFile);
+    const image = req.file;
+    const imageUrl = await uploadImage(image);
 
     const diseases_data = {
       user_id: req.user.id,
@@ -27,10 +27,9 @@ exports.postDiseases = async (req, res) => {
 
     await Disease.create(diseases_data);
 
-    return res.status(200).send({
-      message: "Success",
-      data: diseases_data,
-    });
+    return res
+      .status(200)
+      .send({ status: "success", message: "Disease has been posted" });
   } catch (error) {
     return res.status(500).send({ status: error.message });
   }

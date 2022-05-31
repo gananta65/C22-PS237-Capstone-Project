@@ -16,7 +16,7 @@ const processFile = multer({
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(processFile.single("file"));
+app.use(processFile.single("image"));
 
 db.sequelize.sync();
 
