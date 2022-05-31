@@ -31,7 +31,7 @@ exports.postDiseases = async (req, res) => {
       .status(200)
       .send({ status: "success", message: "Disease has been posted" });
   } catch (error) {
-    return res.status(500).send({ status: error.message });
+    return res.status(500).send({ status: error });
   }
 };
 
