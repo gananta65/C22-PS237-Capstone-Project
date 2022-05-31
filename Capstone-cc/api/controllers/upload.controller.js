@@ -1,6 +1,6 @@
 const { format } = require("util");
 const gcConfig = require("../config/storage.config");
-const gcBucket = gcConfig.bucket("image_upload_test333");
+const gcBucket = gcConfig.bucket("capstone_img_bucket");
 
 exports.uploadImage = (file) =>
   new Promise((resolve, reject) => {
@@ -19,7 +19,7 @@ exports.uploadImage = (file) =>
     });
 
     blobStream.on("error", () => {
-      reject(`Can't upload file, try again`);
+      reject(`Can't upload image, try again`);
     });
 
     blobStream.end(buffer);
