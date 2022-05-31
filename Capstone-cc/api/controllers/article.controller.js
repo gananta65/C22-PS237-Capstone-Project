@@ -1,25 +1,25 @@
-const db = require("../models");
+const Article = require("../models").Article;
 
-const Article = db.Article;
-
-exports.getArticles = (req, res) => {
-  Article.findAll()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((error) => {
-      res.status(500).send({ status: error.message });
-    });
+exports.getArticles = async (req, res) => {
+  try {
+    const data = await Article.findAll();
+    return res.status(200).send({ status: "Success", data: data });
+  } catch (error) {
+    return res.status(500).send({ status: error.message });
+  }
 };
 
-exports.getOne = (req, res) => {
-  const id = req.params.id;
-
-  Article.findOne({ where: { id: id } })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((error) => {
-      res.status(404).send({ status: error.message || "Article not found" });
-    });
+exports.getOne = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Article.findOne({ where: { id: id } });
+    if (!data) {
+      return res
+        .status(404)
+        .send({ status: "Failed", message: "data not found" });
+    }
+    return res.status(200).send({ status: "Success", data: data });
+  } catch (error) {
+    return res.status(500).send({ status: error.message });
+  }
 };

@@ -1,84 +1,42 @@
-const db = require("../models");
-const bcrypt = require("bcrypt");
-const User = db.User;
-const Op = db.Sequelize.Op;
+const User = require("../models/").User;
+const { uploadImage } = require("./upload.controller");
 
-exports.register = (req, res) => {
-  if (
-    !req.body.email ||
-    !req.body.username ||
-    !req.body.password ||
-    !req.body.name ||
-    !req.body.image
-  ) {
-    res.status(500).send({
-      message: "Please fill all forms",
+exports.getUser = async (req, res) => {
+  try {
+    const data = await User.findOne({
+      attributes: ["id", "name", "email", "username", "image"],
+      where: { id: req.user.id },
     });
-    return;
+    return res.status(200).send({ status: "success", data: data });
+  } catch (error) {
+    return res.status(404).send({ status: error.message });
   }
-
-  const user_data = {
-    email: req.body.email,
-    username: req.body.username,
-    password: req.body.password,
-    name: req.body.name,
-    image: req.body.image,
-  };
-
-  User.create(user_data)
-    .then((data) => {
-      res.send({ status: "success", data: data });
-    })
-    .catch((error) => {
-      res.status(500).send({ status: error.message });
-    });
 };
 
-exports.login = (req, res) => {
-  const username = req.query.username;
-  const password = req.query.password;
-  User.findOne({
-    where: {
-      [Op.and]: [{ username: username }, { password: password }],
-    },
-  })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((error) => {
-      res.status(404).send({ status: error.message || "User not found" });
-    });
-};
-exports.getProfile = (req, res) => {
-  const id = req.params.id;
-  User.findOne({ where: { id: id } })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((error) => {
-      res.status(404).send({ status: error.message || "User not found" });
-    });
-};
-exports.update = (req, res) => {
-  const id = req.params.id;
+exports.updateUser = async (req, res) => {
+  try {
+    let imageUrl;
 
-  User.update(req.body, {
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "User profile was updated successfully.",
-        });
-      } else {
-        res.send({
-          message: `Cannot update user profile with id ${id}`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error updating user profile, try again later",
-      });
+    if (req.file) {
+      const image = req.file;
+      imageUrl = await uploadImage(image);
+    }
+
+    const user_data = {
+      name: req.body.name ?? req.user.name,
+      email: req.body.email ?? req.user.email,
+      username: req.body.username ?? req.user.username,
+      image: imageUrl ?? req.user.image,
+    };
+
+    await User.update(user_data, {
+      where: { id: req.user.id },
     });
+
+    return res
+      .status(200)
+      .send({ status: "success", message: "User has been updated" });
+  } catch (error) {
+    return res.status(500).send({ status: error.message });
+  }
 };
