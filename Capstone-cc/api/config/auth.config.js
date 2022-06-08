@@ -1,4 +1,4 @@
 module.exports = {
   secret: "capstone",
-  expires: "24h",
+  expires: "90d",
 };
