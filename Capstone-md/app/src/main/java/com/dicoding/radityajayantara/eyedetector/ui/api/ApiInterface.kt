@@ -14,12 +14,12 @@ interface ApiInterface {
         @Field("username") username: String,
         @Field("password") password: String,
         @Field("name") name: String,
-    ):Call<ResponseBody>
+    ):Call<ApiResponse>
 
     @FormUrlEncoded
     @POST("auth/login")
     fun login(
-        @Field("email") email: String,
+        @Field("username") username: String,
         @Field("password") password: String,
-    ):Call<ResponseBody>
+    ):Call<LoginResponse>
 }
