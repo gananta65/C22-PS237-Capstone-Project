@@ -43,6 +43,6 @@ class HomeFragment : Fragment() {
                 val args = Bundle()
                 fragment.arguments = args
                 return fragment
-            }
+        }
     }
 }
