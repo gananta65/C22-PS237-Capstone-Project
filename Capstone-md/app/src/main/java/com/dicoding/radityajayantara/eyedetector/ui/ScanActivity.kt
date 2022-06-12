@@ -61,18 +61,6 @@ class ScanActivity : AppCompatActivity() {
                 }
             })
         }
-
-
-//        picture.setOnClickListener(View.OnClickListener {
-//            // Launch camera if we have permission
-//            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-//                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                startActivityForResult(cameraIntent, 1)
-//            } else {
-//                //Request camera permission if we don't have it.
-//                requestPermissions(arrayOf(Manifest.permission.CAMERA), 100)
-//            }
-//        })
     }
 
     fun classifyImage(image: Bitmap?) {
@@ -81,21 +69,18 @@ class ScanActivity : AppCompatActivity() {
 
         val model: Model = Model.newInstance(applicationContext)
 
-        // Creates inputs for reference.
         val inputFeature0 =
             TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)
         val byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3)
         byteBuffer.order(ByteOrder.nativeOrder())
 
-        // get 1D array of 224 * 224 pixels in image
         val intValues = IntArray(imageSize * imageSize)
         image!!.getPixels(intValues, 0, image.width, 0, 0, image.width, image.height)
 
-        // iterate over pixels and extract R, G, and B values. Add to bytebuffer.
         var pixel = 0
         for (i in 0 until imageSize) {
             for (j in 0 until imageSize) {
-                val `val` = intValues[pixel++] // RGB
+                val `val` = intValues[pixel++]
                 byteBuffer.putFloat((`val` shr 16 and 0xFF) * (1f / 255f))
                 byteBuffer.putFloat((`val` shr 8 and 0xFF) * (1f / 255f))
                 byteBuffer.putFloat((`val` and 0xFF) * (1f / 255f))
@@ -103,12 +88,10 @@ class ScanActivity : AppCompatActivity() {
         }
         inputFeature0.loadBuffer(byteBuffer)
 
-        // Runs model inference and gets result.
         val outputs: Model.Outputs = model.process(inputFeature0)
         val outputFeature0: TensorBuffer = outputs.getOutputFeature0AsTensorBuffer()
         val confidences = outputFeature0.floatArray
 
-        // find the index of the class with the biggest confidence.
         var maxPos = 0
         var maxConfidence = 0f
 
@@ -148,7 +131,6 @@ class ScanActivity : AppCompatActivity() {
 
         txt.also { descriptionText!!.text = it }
 
-        // Releases model resources if no longer used.
         model.close()
     }
 

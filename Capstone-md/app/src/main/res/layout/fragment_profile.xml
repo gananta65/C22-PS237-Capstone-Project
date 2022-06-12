@@ -39,76 +39,20 @@
         app:layout_constraintEnd_toEndOf="@+id/backgroundBanner"
         app:layout_constraintStart_toStartOf="@+id/backgroundBanner"
         app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <ImageView
-        android:id="@+id/profileBox"
-        android:layout_width="400dp"
-        android:layout_height="206dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/profile_box"
-        app:layout_constraintEnd_toEndOf="@+id/backgroundBanner"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="@+id/backgroundBanner"
-        app:layout_constraintTop_toBottomOf="@+id/backgroundBanner" />
+        tools:ignore="MissingClass" />
 
     <Button
         android:id="@+id/buttonLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="508dp"
+        android:layout_marginTop="176dp"
         android:text="Logout"
-        app:layout_constraintEnd_toEndOf="@+id/profileBox"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@+id/profileBox"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/accounts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Accounts"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/profileBox"
-        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundBanner"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/profileBox" />
-
-    <TextView
-        android:id="@+id/profileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Nama Lengkap"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/profilePicture"
-        app:layout_constraintStart_toStartOf="@+id/profilePicture"
-        app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
-
-    <TextView
-        android:id="@+id/profileEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="email"
-        app:layout_constraintEnd_toEndOf="@+id/profileName"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/profileName"
-        app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
-
-    <TextView
-        android:id="@+id/profileUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Username"
-        app:layout_constraintEnd_toEndOf="@+id/profileBox"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="@+id/profileBox"
-        app:layout_constraintTop_toBottomOf="@+id/accounts" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
