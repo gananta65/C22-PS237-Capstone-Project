@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val homeFragment = HomeFragment()
-    private val scanFragment = ScanFragment()
     private val profileFragment = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.listHome -> loadFragment(homeFragment)
-                R.id.scanFragment -> loadFragment(scanFragment)
                 R.id.profileFragment -> loadFragment(profileFragment)
             }
             true
