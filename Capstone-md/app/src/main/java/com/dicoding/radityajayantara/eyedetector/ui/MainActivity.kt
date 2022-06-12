@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.radityajayantara.eyedetector.R
 import com.dicoding.radityajayantara.eyedetector.databinding.ActivityMainBinding
@@ -19,15 +20,36 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class MainActivity : AppCompatActivity() {
     private lateinit var articleViewModel: SharedViewModel
     private lateinit var binding: ActivityMainBinding
+
+    private val homeFragment = HomeFragment()
+    private val profileFragment = ProfileFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setViewModel()
+        loadFragment(homeFragment)
 
-        binding.logOutBtn.setOnClickListener {
-            logOut()
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.listHome -> loadFragment(homeFragment)
+                R.id.profileFragment -> loadFragment(profileFragment)
+            }
+            true
+        }
+
+//        binding.logOutBtn.setOnClickListener {
+//            logOut()
+//        }
+    }
+
+    private  fun loadFragment(fragment: Fragment){
+        if(fragment != null){
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.content,fragment)
+            transaction.commit()
         }
     }
 
