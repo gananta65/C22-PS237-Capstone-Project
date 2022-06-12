@@ -52,5 +52,3 @@ Click [this link](https://github.com/gananta65/C22-PS237-Capstone-Project/tree/m
 ```
 
 - Third, open the folder in Android Studio and run the program
-
-- Or you can simply download our application, in our [landing page](http://34.135.150.188/)
