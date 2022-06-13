@@ -9,7 +9,7 @@ const Banner = () => {
           consulting with doctor
         </h1>
         <a
-          href=""
+          href="https://drive.google.com/file/d/1qUJLz-gCvj9y_RJZ5YA8GCQFMG-fvZsF/view?usp=sharing"
           className="btn btn-outline-light tombol rounded-pill mt-3 py-3 px-4"
         >
           Download Now
